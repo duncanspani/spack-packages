@@ -907,8 +907,11 @@ class Root(CMakePackage):
             env.unset("MACOSX_DEPLOYMENT_TARGET")
 
         # https://github.com/root-project/root/issues/18949
-        if "+cxxmodules" in self.spec and "+vc" in self.spec:
-            env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
+        if "+cxxmodules" in self.spec:
+            if "+vc" in self.spec:
+                env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
+            if "+veccore" in self.spec:
+                env.prepend_path("ROOT_INCLUDE_PATH", self.spec["veccore"].prefix.include)
 
     @property
     def root_library_path(self):
@@ -929,8 +932,11 @@ class Root(CMakePackage):
         env.prepend_path(self.root_library_path, self.prefix.lib.root)
 
         # https://github.com/root-project/root/issues/18949
-        if "+cxxmodules" in self.spec and "+vc" in self.spec:
-            env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
+        if "+cxxmodules" in self.spec:
+            if "+vc" in self.spec:
+                env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
+            if "+veccore" in self.spec:
+                env.prepend_path("ROOT_INCLUDE_PATH", self.spec["veccore"].prefix.include)
 
     def setup_dependent_build_environment(self, env: EnvironmentModifications, dependent_spec):
         env.set("ROOTSYS", self.prefix)
@@ -946,8 +952,11 @@ class Root(CMakePackage):
         # library path
 
         # https://github.com/root-project/root/issues/18949
-        if "+cxxmodules" in self.spec and "+vc" in self.spec:
-            env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
+        if "+cxxmodules" in self.spec:
+            if "+vc" in self.spec:
+                env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
+            if "+veccore" in self.spec:
+                env.prepend_path("ROOT_INCLUDE_PATH", self.spec["veccore"].prefix.include)
 
     def setup_dependent_run_environment(self, env: EnvironmentModifications, dependent_spec):
         # Set up runtime dependencies *of downstream packages* that use ROOT
