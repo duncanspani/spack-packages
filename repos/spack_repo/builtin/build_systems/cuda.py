@@ -168,7 +168,9 @@ class CudaPackage(PackageBase):
     # Compute Capability 101 was renamed to 110 in CUDA 13
     depends_on("cuda@12.8:12.9", when="cuda_arch=101")
     depends_on("cuda@12.8:12.9", when="cuda_arch=101a")
+    depends_on("cuda@12.9:", when="cuda_arch=100")
     depends_on("cuda@12.9", when="cuda_arch=101f")
+    depends_on("cuda@13.0:", when="cuda_arch=100")
     depends_on("cuda@13.0:", when="cuda_arch=110")
     depends_on("cuda@13.0:", when="cuda_arch=110a")
     depends_on("cuda@13.0:", when="cuda_arch=110f")
